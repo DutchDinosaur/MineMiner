@@ -14,27 +14,19 @@ public class Chunk : MonoBehaviour
     [SerializeField] private string seed;
     [SerializeField] private bool useRandomSeed;
     [Space(10)]
-    [Range(0, 100), SerializeField] private byte randomFillPercent = 40;
+    [Range(0, 100), SerializeField] public byte randomFillPercent = 40;
     [SerializeField] private byte smoothingPasses = 5;
 
     public bool[,] walls;
     public bool[,] bombs;
     public int[,] values;
 
-    //private void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        generateChunk();
-    //    }
-    //}
-
     void Start()
     {
         generateChunk();
     }
 
-    void generateChunk()
+    public void generateChunk()
     {
         //generate walls
         walls = new bool[chunkSize.x, chunkSize.y];
@@ -64,9 +56,9 @@ public class Chunk : MonoBehaviour
 
         for (int x = 0; x < chunkSize.x; x++) {
             for (int y = 0; y < chunkSize.y; y++) {
-                if (x == 0 || x == chunkSize.x - 1 /*|| y == 0 || y == chunkSize.y -1*/) {
+                if (false/*x == 0 || x == chunkSize.x - 1 /*|| y == 0 || y == chunkSize.y -1*/) {
                     walls[x, y] = true;
-                } else if (y < 4) {
+                } else if (y < 3 || y > chunkSize.y - 3) {
                     walls[x, y] = false;
                 } else {
                     walls[x, y] = (Random.Next(0, 100) < randomFillPercent) ? true : false;
@@ -81,7 +73,7 @@ public class Chunk : MonoBehaviour
             for (int y = 0; y < chunkSize.y; y++) {
                 int neighborWallTiles = GetSurroundingWallCount(x, y);
 
-                if (neighborWallTiles > 4) {
+                if (neighborWallTiles > 5) {
                     walls[x, y] = true;
                 } else if (neighborWallTiles < 4) {
                     walls[x, y] = false;
@@ -117,7 +109,7 @@ public class Chunk : MonoBehaviour
     void generateChunkObjects() {
         for (int x = 0; x < chunkSize.x; x++) {
             for (int y = 0; y < chunkSize.y; y++) {
-                GameObject tile = GameObject.Instantiate(tilePrefab,new Vector3(x - chunkSize.x/2,y,0),Quaternion.identity,transform);
+                GameObject tile = GameObject.Instantiate(tilePrefab,new Vector3(x - chunkSize.x/2,y + transform.position.y,0),Quaternion.identity,transform);
                 SpriteRenderer spriteRenderer = tile.GetComponent<SpriteRenderer>();
 
                 if (walls[x, y]) {
@@ -166,15 +158,11 @@ public class Chunk : MonoBehaviour
         return wallCount;
     }
 
-    int GetSurroundingBombCount(int gridX, int gridY)
-    {
+    int GetSurroundingBombCount(int gridX, int gridY) {
         int bombCount = 0;
-        for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX++)
-        {
-            for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY++)
-            {
-                if (neighbourX >= 0 && neighbourX < chunkSize.x && neighbourY >= 0 && neighbourY < chunkSize.y)
-                {
+        for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX++) {
+            for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY++) {
+                if (neighbourX >= 0 && neighbourX < chunkSize.x && neighbourY >= 0 && neighbourY < chunkSize.y) {
                     if (neighbourX != gridX || neighbourY != gridY)
                     {
                         bombCount += (bombs[neighbourX, neighbourY]) ? 1 : 0;
@@ -184,16 +172,4 @@ public class Chunk : MonoBehaviour
         }
         return bombCount;
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    for (int x = 0; x < chunkSize.x; x++) {
-    //        for (int y = 0; y < chunkSize.y; y++)
-    //        {
-    //            Gizmos.color = (walls[x, y] == true) ? Color.black :Color.white;
-    //            Vector3 pos = new Vector3(-chunkSize.x/2 + x + .5f, y + .5f, 0);
-    //            Gizmos.DrawCube(pos, Vector3.one);
-    //        }
-    //    }
-    //}
 }

@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Text score;
+    //[SerializeField] private Text score;
     private int scoreint;
 
-    [SerializeField] private Chunk currentChunk;
-    private Vector2Int posInCurrentChunk;
+    [SerializeField] public Chunk currentChunk;
+    public Vector2Int posInCurrentChunk;
 
     private void Start()
     {
@@ -61,10 +61,10 @@ public class Player : MonoBehaviour
                 }
                 break;
         }
-        transform.position = new Vector3(posInCurrentChunk.x - currentChunk.chunkSize.x / 2, posInCurrentChunk.y,-1);
-        if (scoreint < posInCurrentChunk.y) {
-            scoreint = posInCurrentChunk.y;
-        }
-        score.text = scoreint.ToString();
+        transform.position = new Vector3(posInCurrentChunk.x - currentChunk.chunkSize.x / 2, posInCurrentChunk.y + currentChunk.transform.position.y,-1);
+        //if (scoreint < posInCurrentChunk.y) {
+        //    scoreint = posInCurrentChunk.y;
+        //}
+        //score.text = scoreint.ToString();
     }
 }
