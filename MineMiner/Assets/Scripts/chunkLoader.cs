@@ -24,7 +24,7 @@ public class chunkLoader : MonoBehaviour
     private void Start()
     {
         if (chunksToLoad.Length > 0) {
-            player.currentChunk = loadChunk(0);
+            player.nextChunk = loadChunk(0);
 
             loadChunk(1);
             loadChunk(2);

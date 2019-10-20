@@ -5,66 +5,98 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    //[SerializeField] private Text score;
+    [SerializeField] private Text score;
     private int scoreint;
 
-    [SerializeField] public Chunk currentChunk;
-    public Vector2Int posInCurrentChunk;
+    public Chunk currentChunk;
+    public Chunk nextChunk;
+    private Chunk lastChunk;
+
+    public Vector2Int chunkPos;
 
     private void Start()
     {
-        posInCurrentChunk = new Vector2Int(currentChunk.chunkSize.x/2, 1);
+        chunkPos = new Vector2Int(currentChunk.chunkSize.x/2, 0);
     }
 
     public void Move(int dir) {
         switch (dir) {
             case 0: //right
-                if (transform.position.x < currentChunk.chunkSize.x/2) {
-                    if (currentChunk.walls[posInCurrentChunk.x + 1, posInCurrentChunk.y]) {
-                        currentChunk.mineTile(posInCurrentChunk.x +1, posInCurrentChunk.y);
+                if (chunkPos.x < currentChunk.chunkSize.x -1) {
+                    if (currentChunk.walls[chunkPos.x + 1, chunkPos.y]) {
+                        currentChunk.mineTile(chunkPos.x +1, chunkPos.y);
                     }
                     else {
-                        posInCurrentChunk += Vector2Int.right;
+                        chunkPos += Vector2Int.right;
                     }
                 }
                 break;
             case 1: //left
-                if (transform.position.x > -currentChunk.chunkSize.x/2) {
-                    if (currentChunk.walls[posInCurrentChunk.x -1, posInCurrentChunk.y])
+                if (chunkPos.x > 0) {
+                    if (currentChunk.walls[chunkPos.x -1, chunkPos.y])
                     {
-                        currentChunk.mineTile(posInCurrentChunk.x -1, posInCurrentChunk.y);
+                        currentChunk.mineTile(chunkPos.x -1, chunkPos.y);
                     }
                     else
                     {
-                        posInCurrentChunk += Vector2Int.left;
+                        chunkPos += Vector2Int.left;
                     }
                 }
                 break;
             case 2: //up
-                if (transform.position.y > -currentChunk.chunkSize.y) {
-                    if (currentChunk.walls[posInCurrentChunk.x, posInCurrentChunk.y + 1]) {
-                        currentChunk.mineTile(posInCurrentChunk.x, posInCurrentChunk.y + 1);
+                if (chunkPos.y < currentChunk.chunkSize.y - 1) {
+                    if (currentChunk.walls[chunkPos.x, chunkPos.y + 1]) {
+                        currentChunk.mineTile(chunkPos.x, chunkPos.y + 1);
                     }
                     else {
-                        posInCurrentChunk += Vector2Int.up;
+                        chunkPos += Vector2Int.up;
                     }
+                }
+                else {
+                    enterNextChunk();
                 }
                 break;
             case 3: //down
-                if (transform.position.y > 0) {
-                    if (currentChunk.walls[posInCurrentChunk.x, posInCurrentChunk.y - 1]) {
-                        currentChunk.mineTile(posInCurrentChunk.x, posInCurrentChunk.y - 1);
+                if (chunkPos.y > 0) {
+                    if (currentChunk.walls[chunkPos.x, chunkPos.y - 1]) {
+                        currentChunk.mineTile(chunkPos.x, chunkPos.y - 1);
                     }
                     else {
-                        posInCurrentChunk += Vector2Int.down;
+                        chunkPos += Vector2Int.down;
                     }
+                }
+                else {
+                    enterlastChunk();
                 }
                 break;
         }
-        transform.position = new Vector3(posInCurrentChunk.x - currentChunk.chunkSize.x / 2, posInCurrentChunk.y + currentChunk.transform.position.y,-1);
-        //if (scoreint < posInCurrentChunk.y) {
-        //    scoreint = posInCurrentChunk.y;
-        //}
-        //score.text = scoreint.ToString();
+        transform.position = new Vector3(chunkPos.x - currentChunk.chunkSize.x / 2, chunkPos.y + currentChunk.transform.position.y,-1);
+        score.text = doScore().ToString();
+    }
+
+    int doScore() {
+        if (scoreint < transform.position.y)
+        {
+            scoreint = (int)transform.position.y;
+        }
+        return scoreint;
+    }
+
+    void enterNextChunk() {
+        lastChunk = currentChunk;
+        currentChunk = nextChunk;
+
+        chunkPos.y = 0;
+        chunkPos.x += (currentChunk.chunkSize.x - lastChunk.chunkSize.x) / 2;
+    }
+
+    void enterlastChunk() {
+        int chunkSizeDifference = lastChunk.chunkSize.x - currentChunk.chunkSize.x;
+        if (chunkSizeDifference > 0 || (chunkPos.x > chunkSizeDifference /2 && chunkPos.x < chunkSizeDifference/2 + lastChunk.chunkSize.x)) {
+            currentChunk = lastChunk;
+
+            chunkPos.y = currentChunk.chunkSize.y - 1;
+            chunkPos.x += (currentChunk.chunkSize.x - nextChunk.chunkSize.x) / 2;
+        }
     }
 }
