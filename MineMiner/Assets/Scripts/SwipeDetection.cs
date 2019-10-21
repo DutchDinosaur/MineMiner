@@ -8,7 +8,7 @@ public class SwipeDetection : MonoBehaviour
     [SerializeField] private float minSwipeDistance = 20;
     [SerializeField] private bool onlySwipeAfterRelaease = true;
 
-    [SerializeField] private Player player;
+    public Player player;
 
     private Vector2 swipeStartPos;
     private Vector2 swipeEndPos;
@@ -32,6 +32,8 @@ public class SwipeDetection : MonoBehaviour
                     break;
             }
         }
+
+        debugControls();
     }
 
     private void CheckForSwipe() {
@@ -69,6 +71,21 @@ public class SwipeDetection : MonoBehaviour
                     player.Move(3);
                 }
             }
+        }
+    }
+
+    private void debugControls() {
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            player.Move(0);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            player.Move(1);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow)) {
+            player.Move(2);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            player.Move(3);
         }
     }
 }
