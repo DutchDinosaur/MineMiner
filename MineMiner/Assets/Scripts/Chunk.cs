@@ -21,10 +21,10 @@ public class Chunk : MonoBehaviour
     public bool[,] bombs;
     public int[,] values;
 
-    void Start()
-    {
-        generateChunk();
-    }
+    //void Start()
+    //{
+    //    generateChunk();
+    //}
 
     public void generateChunk()
     {
@@ -130,10 +130,6 @@ public class Chunk : MonoBehaviour
             SpriteRenderer tile = gameObject.GetComponentsInChildren<SpriteRenderer>()[GetTileObjectIndex(x,y)];
             tile.color = Color.white;
             tile.sprite = tileNumbers[values[x, y]];
-
-            Debug.Log("mine");
-            Debug.Log(x);
-            Debug.Log(y);
         }
         else {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
