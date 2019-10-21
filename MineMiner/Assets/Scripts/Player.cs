@@ -84,11 +84,9 @@ public class Player : MonoBehaviour
 
     void enterNextChunk() {
         int chunkSizeDifference = nextChunk.chunkSize.x - currentChunk.chunkSize.x;
-        if (chunkSizeDifference > 0 || (chunkPos.x >= -chunkSizeDifference / 2 && chunkPos.x < -chunkSizeDifference / 2 + nextChunk.chunkSize.x))
-        {
+        if (chunkSizeDifference > 0 || (chunkPos.x >= -chunkSizeDifference / 2 && chunkPos.x < -chunkSizeDifference / 2 + nextChunk.chunkSize.x)) {
             lastChunk = currentChunk;
             currentChunk = nextChunk;
-            Debug.Log(chunkSizeDifference);
             chunkPos.y = 0;
             chunkPos.x += (currentChunk.chunkSize.x - lastChunk.chunkSize.x) / 2;
         }
@@ -98,7 +96,6 @@ public class Player : MonoBehaviour
         int chunkSizeDifference = lastChunk.chunkSize.x - currentChunk.chunkSize.x;
         if (chunkSizeDifference > 0 || (chunkPos.x >= -chunkSizeDifference /2 && chunkPos.x < -chunkSizeDifference/2 + lastChunk.chunkSize.x)) {
             currentChunk = lastChunk;
-
             chunkPos.y = currentChunk.chunkSize.y - 1;
             chunkPos.x += (currentChunk.chunkSize.x - nextChunk.chunkSize.x) / 2;
         }

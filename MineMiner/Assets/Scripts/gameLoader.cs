@@ -12,7 +12,8 @@ public class gameLoader : MonoBehaviour
 
     [SerializeField] private chunkData[] chunksToLoad;
 
-    private int chunksLoaded;
+    private int currentChunk;
+    private Chunk lastLoadedChunk;
 
     [System.Serializable]
     public class chunkData {
@@ -26,22 +27,41 @@ public class gameLoader : MonoBehaviour
         GetComponent<SwipeDetection>().player = player;
         GetComponent<CameraController>().player = player.transform;
 
-        if (chunksToLoad.Length > 0) {
+        if (chunksToLoad.Length > 1) {
             player.currentChunk = loadChunk(0);
-            player.nextChunk = loadChunk(1);
+            lastLoadedChunk = loadChunk(1);
+            currentChunk = 1;
+            player.nextChunk = lastLoadedChunk;
+        }
+        else {
+            Debug.LogError("not enough chunksToLoad");
+        }
+    }
 
-            loadChunk(2);
-            loadChunk(3);
-            loadChunk(4);
+    private void Update() {
+        if (player.transform.position.y > player.currentChunk.transform.position.y + chunkSize.y/2 && player.currentChunk == lastLoadedChunk) {            
+            lastLoadedChunk = loadChunk(currentChunk += 1);
+            player.nextChunk = lastLoadedChunk;
+            Debug.Log("aaaaaaaaaa");
         }
     }
 
     Chunk loadChunk(int i) {
-        Chunk chunk = GameObject.Instantiate(chunkPrefab, transform.position + Vector3.up * chunkSize.y * i, Quaternion.identity).GetComponent<Chunk>();
-        chunk.chunkSize = new Vector2Int(chunksToLoad[i].ChunkWidth, chunkSize.y);
-        chunk.randomBombPercent = chunksToLoad[i].randomBombPercent;
-        chunk.randomFillPercent = chunksToLoad[i].randomFillPercent;
-        chunk.generateChunk();
-        return chunk;
+        if (i <= chunksToLoad.Length) {
+            Chunk chunk = GameObject.Instantiate(chunkPrefab, transform.position + Vector3.up * chunkSize.y * i, Quaternion.identity).GetComponent<Chunk>();
+            chunk.chunkSize = new Vector2Int(chunksToLoad[i].ChunkWidth, chunkSize.y);
+            chunk.randomBombPercent = chunksToLoad[i].randomBombPercent;
+            chunk.randomFillPercent = chunksToLoad[i].randomFillPercent;
+            chunk.generateChunk();
+            return chunk;
+        }
+        else {
+            Chunk Chunk = GameObject.Instantiate(chunkPrefab, transform.position + Vector3.up * chunkSize.y * (chunksToLoad.Length - 1), Quaternion.identity).GetComponent<Chunk>();
+            Chunk.chunkSize = new Vector2Int(chunksToLoad[chunksToLoad.Length -1].ChunkWidth, chunkSize.y);
+            Chunk.randomBombPercent = chunksToLoad[chunksToLoad.Length -1].randomBombPercent;
+            Chunk.randomFillPercent = chunksToLoad[chunksToLoad.Length -1].randomFillPercent;
+            Chunk.generateChunk();
+            return Chunk;
+        }
     }
 }
