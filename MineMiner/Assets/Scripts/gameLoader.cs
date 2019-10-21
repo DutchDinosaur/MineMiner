@@ -47,7 +47,7 @@ public class gameLoader : MonoBehaviour
     }
 
     Chunk loadChunk(int i) {
-        if (i <= chunksToLoad.Length) {
+        if (i < chunksToLoad.Length) {
             Chunk chunk = GameObject.Instantiate(chunkPrefab, transform.position + Vector3.up * chunkSize.y * i, Quaternion.identity).GetComponent<Chunk>();
             chunk.chunkSize = new Vector2Int(chunksToLoad[i].ChunkWidth, chunkSize.y);
             chunk.randomBombPercent = chunksToLoad[i].randomBombPercent;
@@ -56,7 +56,7 @@ public class gameLoader : MonoBehaviour
             return chunk;
         }
         else {
-            Chunk Chunk = GameObject.Instantiate(chunkPrefab, transform.position + Vector3.up * chunkSize.y * (chunksToLoad.Length - 1), Quaternion.identity).GetComponent<Chunk>();
+            Chunk Chunk = GameObject.Instantiate(chunkPrefab, transform.position + Vector3.up * chunkSize.y * (chunksToLoad.Length + 1), Quaternion.identity).GetComponent<Chunk>();
             Chunk.chunkSize = new Vector2Int(chunksToLoad[chunksToLoad.Length -1].ChunkWidth, chunkSize.y);
             Chunk.randomBombPercent = chunksToLoad[chunksToLoad.Length -1].randomBombPercent;
             Chunk.randomFillPercent = chunksToLoad[chunksToLoad.Length -1].randomFillPercent;

@@ -254,21 +254,36 @@ MonoBehaviour:
   chunkPrefab: {fileID: 5641907957307964040, guid: 77b269d310f54114982fede32081545c,
     type: 3}
   chunksToLoad:
-  - ChunkWidth: 3
+  - ChunkWidth: 9
     randomBombPercent: 9
     randomFillPercent: 43
-  - ChunkWidth: 5
-    randomBombPercent: 13
-    randomFillPercent: 44
   - ChunkWidth: 7
+    randomBombPercent: 13
+    randomFillPercent: 51
+  - ChunkWidth: 5
     randomBombPercent: 14
-    randomFillPercent: 48
-  - ChunkWidth: 9
+    randomFillPercent: 50
+  - ChunkWidth: 5
     randomBombPercent: 12
+    randomFillPercent: 48
+  - ChunkWidth: 3
+    randomBombPercent: 3
+    randomFillPercent: 8
+  - ChunkWidth: 3
+    randomBombPercent: 6
+    randomFillPercent: 12
+  - ChunkWidth: 3
+    randomBombPercent: 7
+    randomFillPercent: 24
+  - ChunkWidth: 3
+    randomBombPercent: 7
     randomFillPercent: 50
   - ChunkWidth: 3
-    randomBombPercent: 11
-    randomFillPercent: 43
+    randomBombPercent: 10
+    randomFillPercent: 56
+  - ChunkWidth: 3
+    randomBombPercent: 15
+    randomFillPercent: 59
 --- !u!114 &1660855984
 MonoBehaviour:
   m_ObjectHideFlags: 0
