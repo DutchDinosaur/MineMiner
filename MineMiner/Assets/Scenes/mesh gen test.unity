@@ -154,7 +154,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -264,7 +264,7 @@ MonoBehaviour:
   randomBombPercent: 10
   seed: 
   useRandomSeed: 0
-  randomFillPercent: 40
+  randomFillPercent: 63
   smoothingPasses: 5
 --- !u!4 &879680536
 Transform:

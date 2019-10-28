@@ -44,44 +44,141 @@ public class GenerateTiledCilinderChunk : MonoBehaviour
     }
 
     public void GenerateTileMesh(bool[,] walls, int y) {
-        int quadCount = chunkWidth;
+        List<Vector3> vertices = new List<Vector3>();
+        List<Vector2> uvs = new List<Vector2>();
+        List<int> triangles = new List<int>();
 
-        Vector3[] vertices = new Vector3[quadCount * 4];
-        Vector2[] uvs = new Vector2[quadCount * 4];
-        int[] triangles = new int[quadCount * 6];
-
-        int triIndex = 0;
         int vertIndex = 0;
 
         for (int x = 0; x < chunkWidth; x++) {
             if (walls[x,y]) {
-                vertices[vertIndex + 0] = new Vector3(x,        circlePosses[y].y,      circlePosses[y].x);
-                vertices[vertIndex + 1] = new Vector3(x,        circlePosses[y + 1].y,  circlePosses[y + 1].x);
-                vertices[vertIndex + 2] = new Vector3(x + 1,    circlePosses[y + 1].y,  circlePosses[y + 1].x);
-                vertices[vertIndex + 3] = new Vector3(x + 1,    circlePosses[y].y,      circlePosses[y].x);
+                vertices.Add(new Vector3(x,         circlePosses[y].y,      circlePosses[y].x));
+                vertices.Add(new Vector3(x,         circlePosses[y + 1].y,  circlePosses[y + 1].x));
+                vertices.Add(new Vector3(x + 1,     circlePosses[y + 1].y,  circlePosses[y + 1].x));
+                vertices.Add(new Vector3(x + 1,     circlePosses[y].y,      circlePosses[y].x));
             }
             else {
-                vertices[vertIndex + 0] = new Vector3(x,        dugCirclePosses[y].y,       dugCirclePosses[y].x);
-                vertices[vertIndex + 1] = new Vector3(x,        dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x);
-                vertices[vertIndex + 2] = new Vector3(x + 1,    dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x);
-                vertices[vertIndex + 3] = new Vector3(x + 1,    dugCirclePosses[y].y,       dugCirclePosses[y].x);
+                vertices.Add(new Vector3(x,         dugCirclePosses[y].y,       dugCirclePosses[y].x));
+                vertices.Add(new Vector3(x,         dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
+                vertices.Add(new Vector3(x + 1,     dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
+                vertices.Add(new Vector3(x + 1,     dugCirclePosses[y].y,       dugCirclePosses[y].x));
             }
 
-            triangles[triIndex + 0] = vertIndex + 2;
-            triangles[triIndex + 1] = vertIndex + 1;
-            triangles[triIndex + 2] = vertIndex + 0;
-            triangles[triIndex + 3] = vertIndex + 3;
-            triangles[triIndex + 4] = vertIndex + 2;
-            triangles[triIndex + 5] = vertIndex + 0;
+            triangles.Add(vertIndex + 2);
+            triangles.Add(vertIndex + 1);
+            triangles.Add(vertIndex + 0);
+            triangles.Add(vertIndex + 3);
+            triangles.Add(vertIndex + 2);
+            triangles.Add(vertIndex + 0);
 
             vertIndex += 4;
-            triIndex += 6;
-            }
 
-        meshes[y].vertices = vertices;
-        meshes[y].triangles = triangles;
-        meshes[y].normals = vertices;
-        //meshes[y].RecalculateNormals();
+            if (!walls[x,y]) {
+                if (y < chunkLength -1) {
+                    if (walls[x,y + 1]) {
+                        vertices.Add(new Vector3(x,         dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
+                        vertices.Add(new Vector3(x,         circlePosses[y + 1].y,      circlePosses[y + 1].x));
+                        vertices.Add(new Vector3(x + 1,     circlePosses[y + 1].y,      circlePosses[y + 1].x));
+                        vertices.Add(new Vector3(x + 1,     dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
+
+                        triangles.Add(vertIndex + 2);
+                        triangles.Add(vertIndex + 1);
+                        triangles.Add(vertIndex + 0);
+                        triangles.Add(vertIndex + 3);
+                        triangles.Add(vertIndex + 2);
+                        triangles.Add(vertIndex + 0);
+
+                        vertIndex += 4;
+                    }
+                }
+                if (y > 0) {
+                    if (walls[x,y - 1]) {
+                        vertices.Add(new Vector3(x,         dugCirclePosses[y].y,   dugCirclePosses[y].x));
+                        vertices.Add(new Vector3(x,         circlePosses[y].y,      circlePosses[y].x));
+                        vertices.Add(new Vector3(x + 1,     circlePosses[y].y,      circlePosses[y].x));
+                        vertices.Add(new Vector3(x + 1,     dugCirclePosses[y].y,   dugCirclePosses[y].x));
+
+                        triangles.Add(vertIndex + 0);
+                        triangles.Add(vertIndex + 1);
+                        triangles.Add(vertIndex + 2);
+                        triangles.Add(vertIndex + 0);
+                        triangles.Add(vertIndex + 2);
+                        triangles.Add(vertIndex + 3);
+
+                        vertIndex += 4;
+                    }
+                }
+                if (x < chunkWidth - 1) {
+                    if (walls[x + 1,y]) {
+                        vertices.Add(new Vector3(x + 1,     dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
+                        vertices.Add(new Vector3(x + 1,     circlePosses[y + 1].y,      circlePosses[y + 1].x));
+                        vertices.Add(new Vector3(x + 1,     circlePosses[y].y,          circlePosses[y].x));
+                        vertices.Add(new Vector3(x + 1,     dugCirclePosses[y].y,       dugCirclePosses[y].x));
+
+                        triangles.Add(vertIndex + 2);
+                        triangles.Add(vertIndex + 1);
+                        triangles.Add(vertIndex + 0);
+                        triangles.Add(vertIndex + 3);
+                        triangles.Add(vertIndex + 2);
+                        triangles.Add(vertIndex + 0);
+
+                        vertIndex += 4;
+                    }
+                }
+                else {
+                    vertices.Add(new Vector3(x + 1,     dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
+                    vertices.Add(new Vector3(x + 1,     circlePosses[y + 1].y,      circlePosses[y + 1].x));
+                    vertices.Add(new Vector3(x + 1,     circlePosses[y].y,          circlePosses[y].x));
+                    vertices.Add(new Vector3(x + 1,     dugCirclePosses[y].y,       dugCirclePosses[y].x));
+
+                    triangles.Add(vertIndex + 2);
+                    triangles.Add(vertIndex + 1);
+                    triangles.Add(vertIndex + 0);
+                    triangles.Add(vertIndex + 3);
+                    triangles.Add(vertIndex + 2);
+                    triangles.Add(vertIndex + 0);
+
+                    vertIndex += 4;
+                }
+                if (x > 0) {
+                    if (walls[x - 1,y]) {
+                        vertices.Add(new Vector3(x,     dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
+                        vertices.Add(new Vector3(x,     circlePosses[y + 1].y,      circlePosses[y + 1].x));
+                        vertices.Add(new Vector3(x,     circlePosses[y].y,          circlePosses[y].x));
+                        vertices.Add(new Vector3(x,     dugCirclePosses[y].y,       dugCirclePosses[y].x));
+
+                        triangles.Add(vertIndex + 0);
+                        triangles.Add(vertIndex + 1);
+                        triangles.Add(vertIndex + 2);
+                        triangles.Add(vertIndex + 0);
+                        triangles.Add(vertIndex + 2);
+                        triangles.Add(vertIndex + 3);
+
+                        vertIndex += 4;
+                    }
+                }
+                else {
+                    vertices.Add(new Vector3(x,     dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
+                    vertices.Add(new Vector3(x,     circlePosses[y + 1].y,      circlePosses[y + 1].x));
+                    vertices.Add(new Vector3(x,     circlePosses[y].y,          circlePosses[y].x));
+                    vertices.Add(new Vector3(x,     dugCirclePosses[y].y,       dugCirclePosses[y].x));
+
+                    triangles.Add(vertIndex + 0);
+                    triangles.Add(vertIndex + 1);
+                    triangles.Add(vertIndex + 2);
+                    triangles.Add(vertIndex + 0);
+                    triangles.Add(vertIndex + 2);
+                    triangles.Add(vertIndex + 3);
+
+                    vertIndex += 4;
+                }
+            }
+        }
+
+        meshes[y].vertices = vertices.ToArray();
+        meshes[y].triangles = triangles.ToArray();
+        //meshes[y].normals = vertices.ToArray();
+        meshes[y].RecalculateNormals();
     }
 
     Vector2[] possesOnCircle(int length, float radius, int chunkIndex) {
