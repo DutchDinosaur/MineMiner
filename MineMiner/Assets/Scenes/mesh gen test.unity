@@ -241,9 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef03ccdf374eb14f98ec37a31e2de77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunkLength: 30
-  chunkWidth: 9
-  chunkCount: 4
+  chunkLength: 86
+  chunkWidth: 14
+  chunkCount: 2
   digDepth: 1
   chunk: {fileID: 879680535}
   chunkTileObject: {fileID: 5799174899960102827, guid: 69b60a7f429cc44449e002d57ebcf43b,

@@ -56,21 +56,17 @@ public class GenerateTiledCilinderChunk : MonoBehaviour
                 vertices.Add(new Vector3(x,         circlePosses[y + 1].y,  circlePosses[y + 1].x));
                 vertices.Add(new Vector3(x + 1,     circlePosses[y + 1].y,  circlePosses[y + 1].x));
                 vertices.Add(new Vector3(x + 1,     circlePosses[y].y,      circlePosses[y].x));
+                AddQuadUVs(new Vector2(0, 0.6667f), new Vector2(0.3333f, 1));
             }
             else {
                 vertices.Add(new Vector3(x,         dugCirclePosses[y].y,       dugCirclePosses[y].x));
                 vertices.Add(new Vector3(x,         dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
                 vertices.Add(new Vector3(x + 1,     dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
                 vertices.Add(new Vector3(x + 1,     dugCirclePosses[y].y,       dugCirclePosses[y].x));
+                AddQuadUVs(new Vector2(0,0), new Vector2(0.3333f,0.3333f));
             }
 
-            triangles.Add(vertIndex + 2);
-            triangles.Add(vertIndex + 1);
-            triangles.Add(vertIndex + 0);
-            triangles.Add(vertIndex + 3);
-            triangles.Add(vertIndex + 2);
-            triangles.Add(vertIndex + 0);
-
+            AddTriangles(false);
             vertIndex += 4;
 
             if (!walls[x,y]) {
@@ -81,13 +77,8 @@ public class GenerateTiledCilinderChunk : MonoBehaviour
                         vertices.Add(new Vector3(x + 1,     circlePosses[y + 1].y,      circlePosses[y + 1].x));
                         vertices.Add(new Vector3(x + 1,     dugCirclePosses[y + 1].y,   dugCirclePosses[y + 1].x));
 
-                        triangles.Add(vertIndex + 2);
-                        triangles.Add(vertIndex + 1);
-                        triangles.Add(vertIndex + 0);
-                        triangles.Add(vertIndex + 3);
-                        triangles.Add(vertIndex + 2);
-                        triangles.Add(vertIndex + 0);
-
+                        AddQuadUVs(new Vector2(0, 0.3334f), new Vector2(0.3333f, 0.6666f));
+                        AddTriangles(false);
                         vertIndex += 4;
                     }
                 }
@@ -98,13 +89,8 @@ public class GenerateTiledCilinderChunk : MonoBehaviour
                         vertices.Add(new Vector3(x + 1,     circlePosses[y].y,      circlePosses[y].x));
                         vertices.Add(new Vector3(x + 1,     dugCirclePosses[y].y,   dugCirclePosses[y].x));
 
-                        triangles.Add(vertIndex + 0);
-                        triangles.Add(vertIndex + 1);
-                        triangles.Add(vertIndex + 2);
-                        triangles.Add(vertIndex + 0);
-                        triangles.Add(vertIndex + 2);
-                        triangles.Add(vertIndex + 3);
-
+                        AddQuadUVs(new Vector2(0, 0.3334f), new Vector2(0.3333f, 0.6666f));
+                        AddTriangles(true);
                         vertIndex += 4;
                     }
                 }
@@ -115,13 +101,8 @@ public class GenerateTiledCilinderChunk : MonoBehaviour
                         vertices.Add(new Vector3(x + 1,     circlePosses[y].y,          circlePosses[y].x));
                         vertices.Add(new Vector3(x + 1,     dugCirclePosses[y].y,       dugCirclePosses[y].x));
 
-                        triangles.Add(vertIndex + 2);
-                        triangles.Add(vertIndex + 1);
-                        triangles.Add(vertIndex + 0);
-                        triangles.Add(vertIndex + 3);
-                        triangles.Add(vertIndex + 2);
-                        triangles.Add(vertIndex + 0);
-
+                        AddQuadUVs(new Vector2(0, 0.3334f), new Vector2(0.3333f, 0.6666f));
+                        AddTriangles(false);
                         vertIndex += 4;
                     }
                 }
@@ -131,13 +112,8 @@ public class GenerateTiledCilinderChunk : MonoBehaviour
                     vertices.Add(new Vector3(x + 1,     circlePosses[y].y,          circlePosses[y].x));
                     vertices.Add(new Vector3(x + 1,     dugCirclePosses[y].y,       dugCirclePosses[y].x));
 
-                    triangles.Add(vertIndex + 2);
-                    triangles.Add(vertIndex + 1);
-                    triangles.Add(vertIndex + 0);
-                    triangles.Add(vertIndex + 3);
-                    triangles.Add(vertIndex + 2);
-                    triangles.Add(vertIndex + 0);
-
+                    AddQuadUVs(new Vector2(0, 0.3334f), new Vector2(0.3333f, 0.6666f));
+                    AddTriangles(false);
                     vertIndex += 4;
                 }
                 if (x > 0) {
@@ -147,13 +123,8 @@ public class GenerateTiledCilinderChunk : MonoBehaviour
                         vertices.Add(new Vector3(x,     circlePosses[y].y,          circlePosses[y].x));
                         vertices.Add(new Vector3(x,     dugCirclePosses[y].y,       dugCirclePosses[y].x));
 
-                        triangles.Add(vertIndex + 0);
-                        triangles.Add(vertIndex + 1);
-                        triangles.Add(vertIndex + 2);
-                        triangles.Add(vertIndex + 0);
-                        triangles.Add(vertIndex + 2);
-                        triangles.Add(vertIndex + 3);
-
+                        AddQuadUVs(new Vector2(0, 0.3334f), new Vector2(0.3333f, 0.6666f));
+                        AddTriangles(true);
                         vertIndex += 4;
                     }
                 }
@@ -163,20 +134,42 @@ public class GenerateTiledCilinderChunk : MonoBehaviour
                     vertices.Add(new Vector3(x,     circlePosses[y].y,          circlePosses[y].x));
                     vertices.Add(new Vector3(x,     dugCirclePosses[y].y,       dugCirclePosses[y].x));
 
-                    triangles.Add(vertIndex + 0);
-                    triangles.Add(vertIndex + 1);
-                    triangles.Add(vertIndex + 2);
-                    triangles.Add(vertIndex + 0);
-                    triangles.Add(vertIndex + 2);
-                    triangles.Add(vertIndex + 3);
-
+                    AddQuadUVs(new Vector2(0, 0.3334f), new Vector2(0.3333f, 0.6666f));
+                    AddTriangles(true);
                     vertIndex += 4;
                 }
             }
         }
 
+        void AddTriangles(bool direction) {
+            if (direction) {
+                triangles.Add(vertIndex + 0);
+                triangles.Add(vertIndex + 1);
+                triangles.Add(vertIndex + 2);
+                triangles.Add(vertIndex + 0);
+                triangles.Add(vertIndex + 2);
+                triangles.Add(vertIndex + 3);
+            }
+            else {
+                triangles.Add(vertIndex + 2);
+                triangles.Add(vertIndex + 1);
+                triangles.Add(vertIndex + 0);
+                triangles.Add(vertIndex + 3);
+                triangles.Add(vertIndex + 2);
+                triangles.Add(vertIndex + 0);
+            }
+        }
+
+        void AddQuadUVs(Vector2 BottomLeftCorner, Vector2 TopRightCorner) {
+            uvs.Add(new Vector2(BottomLeftCorner.x, BottomLeftCorner.y));
+            uvs.Add(new Vector2(BottomLeftCorner.x, TopRightCorner.y));
+            uvs.Add(new Vector2(TopRightCorner.x, TopRightCorner.y));
+            uvs.Add(new Vector2(TopRightCorner.x, BottomLeftCorner.y));
+        }
+
         meshes[y].vertices = vertices.ToArray();
         meshes[y].triangles = triangles.ToArray();
+        meshes[y].uv = uvs.ToArray();
         //meshes[y].normals = vertices.ToArray();
         meshes[y].RecalculateNormals();
     }
@@ -189,4 +182,6 @@ public class GenerateTiledCilinderChunk : MonoBehaviour
         }
         return posses;
     }
+
+    Vector2[] uvPosses;
 }
