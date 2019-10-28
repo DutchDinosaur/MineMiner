@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1108559211060560866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1108559211060560879}
+  - component: {fileID: 2215093720156620480}
+  - component: {fileID: 6068228146936132746}
+  m_Layer: 0
+  m_Name: chunk 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1108559211060560879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108559211060560866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2215093720156620480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108559211060560866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d4e0e6fd038fa4bb411e034637e39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunkSize: {x: 0, y: 0}
+  chunkIndex: 0
+  chunkCount: 4
+  randomBombPercent: 10
+  tileNumbers: []
+  seed: 
+  useRandomSeed: 0
+  randomFillPercent: 68
+  smoothingPasses: 5
+--- !u!114 &6068228146936132746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108559211060560866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcd4b1e0279c7b47b162a9cee694705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunkLength: 30
+  chunkWidth: 9
+  chunkCount: 4
+  digDepth: 1
+  chunk: {fileID: 2215093720156620480}
+  chunkTileObject: {fileID: 5799174899960102827, guid: 69b60a7f429cc44449e002d57ebcf43b,
+    type: 3}
+  chunkIndex: 0
