@@ -32,7 +32,6 @@ public class SwipeDetection : MonoBehaviour
                     break;
             }
         }
-
         debugControls();
     }
 

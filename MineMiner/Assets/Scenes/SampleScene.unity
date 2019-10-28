@@ -256,34 +256,34 @@ MonoBehaviour:
   chunksToLoad:
   - ChunkWidth: 9
     randomBombPercent: 9
-    randomFillPercent: 43
+    randomFillPercent: 53
   - ChunkWidth: 7
     randomBombPercent: 13
-    randomFillPercent: 51
+    randomFillPercent: 58
   - ChunkWidth: 5
     randomBombPercent: 14
-    randomFillPercent: 50
+    randomFillPercent: 53
   - ChunkWidth: 5
     randomBombPercent: 12
-    randomFillPercent: 48
+    randomFillPercent: 53
   - ChunkWidth: 3
     randomBombPercent: 3
-    randomFillPercent: 8
+    randomFillPercent: 13
   - ChunkWidth: 3
     randomBombPercent: 6
-    randomFillPercent: 12
+    randomFillPercent: 42
   - ChunkWidth: 3
     randomBombPercent: 7
-    randomFillPercent: 24
+    randomFillPercent: 42
   - ChunkWidth: 3
     randomBombPercent: 7
-    randomFillPercent: 50
+    randomFillPercent: 57
   - ChunkWidth: 3
     randomBombPercent: 10
-    randomFillPercent: 56
+    randomFillPercent: 64
   - ChunkWidth: 3
     randomBombPercent: 15
-    randomFillPercent: 59
+    randomFillPercent: 72
 --- !u!114 &1660855984
 MonoBehaviour:
   m_ObjectHideFlags: 0
