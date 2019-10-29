@@ -10,10 +10,10 @@ public class GenerateTiledCilinderChunk2 : MonoBehaviour
 
     public float digDepth = 1;
 
-    public Chunk2 chunk;
+    private Chunk2 chunk;
     [SerializeField] private GameObject chunkTileObject;
 
-    public int chunkIndex; // controls where chunk is generated on cilinder
+    public int chunkIndex;
 
     [HideInInspector]
     float radius;
@@ -21,8 +21,14 @@ public class GenerateTiledCilinderChunk2 : MonoBehaviour
     Vector2[] circlePosses;
     Vector2[] dugCirclePosses;
 
+    private void Start()
+    {
+        Initialise();
+    }
 
     public void Initialise() {
+        chunk = gameObject.GetComponent<Chunk2>();
+
         meshes = new Mesh[chunkLength];
         for (int i = 0; i < chunkLength; i++) {
             meshes[i] = GameObject.Instantiate(chunkTileObject,transform.position,Quaternion.identity,transform).GetComponent<MeshFilter>().mesh;
@@ -164,6 +170,7 @@ public class GenerateTiledCilinderChunk2 : MonoBehaviour
             uvs.Add(new Vector2(TopRightCorner.x, BottomLeftCorner.y));
         }
 
+        meshes[y].Clear();
         meshes[y].vertices = vertices.ToArray();
         meshes[y].triangles = triangles.ToArray();
         meshes[y].uv = uvs.ToArray();

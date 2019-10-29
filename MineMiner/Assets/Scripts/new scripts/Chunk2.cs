@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class Chunk2 : MonoBehaviour
 {
     public Vector2Int chunkSize;
-    public int chunkIndex;
-    public int chunkCount = 4;
 
     [Range(0, 30)] public byte randomBombPercent = 10;
     [SerializeField] private Sprite[] tileNumbers;
@@ -25,15 +23,7 @@ public class Chunk2 : MonoBehaviour
 
     private GenerateTiledCilinderChunk2 meshGen;
 
-
-    private void Start()
-    {
-        generateChunk();
-    }
-
-    public void generateChunk()
-    {
-        //generate walls
+    public void generateChunk() {
         walls = new bool[chunkSize.x, chunkSize.y];
         bombs = new bool[chunkSize.x, chunkSize.y];
         values = new int[chunkSize.x, chunkSize.y];
@@ -46,8 +36,6 @@ public class Chunk2 : MonoBehaviour
 
         generateBombs();
         calculateSurroundingBombCount();
-
-        generateChunkObjects();
     }
 
 
@@ -110,22 +98,17 @@ public class Chunk2 : MonoBehaviour
         }
     }
 
-    void generateChunkObjects() {
-        meshGen = gameObject.GetComponent<GenerateTiledCilinderChunk2>();
-        meshGen.chunk = this;
-        meshGen.chunkLength = chunkSize.y;
-        meshGen.chunkWidth = chunkSize.x;
-        meshGen.chunkCount = chunkCount;
-        meshGen.chunkIndex = chunkIndex;
-        
-        meshGen.Initialise();
-    }
-
-
     public void mineTile(int x, int y) {
         if (!bombs[x,y]) {
             walls[x, y] = false;
+            meshGen = GetComponent<GenerateTiledCilinderChunk2>();
             meshGen.GenerateTileMesh(walls, y);
+            if (y > 0) {
+                meshGen.GenerateTileMesh(walls, y - 1);
+            }
+            if (y < chunkSize.y) {
+                meshGen.GenerateTileMesh(walls, y + 1);
+            }
         }
         else {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

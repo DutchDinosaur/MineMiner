@@ -14,8 +14,7 @@ public class Player2 : MonoBehaviour
 
     public Vector2Int chunkPos;
 
-    private void Start()
-    {
+    private void Start() {
         chunkPos = new Vector2Int(currentChunk.chunkSize.x/2, 0);
     }
 
@@ -33,12 +32,10 @@ public class Player2 : MonoBehaviour
                 break;
             case 1: //left
                 if (chunkPos.x > 0) {
-                    if (currentChunk.walls[chunkPos.x -1, chunkPos.y])
-                    {
+                    if (currentChunk.walls[chunkPos.x -1, chunkPos.y]) {
                         currentChunk.mineTile(chunkPos.x -1, chunkPos.y);
                     }
-                    else
-                    {
+                    else {
                         chunkPos += Vector2Int.left;
                     }
                 }
@@ -75,12 +72,19 @@ public class Player2 : MonoBehaviour
         //score.text = doScore().ToString();
     }
 
-
     void UpdatePosition() {
-        float dir = ((2 * Mathf.PI) / (currentChunk.chunkCount * currentChunk.chunkSize.y * (currentChunk.chunkIndex + 1))) * chunkPos.y;
-        float radius = (currentChunk.chunkCount * currentChunk.chunkSize.y) / (2 * Mathf.PI);
+        GenerateTiledCilinderChunk2 chunkMeshGen = currentChunk.GetComponent<GenerateTiledCilinderChunk2>();
 
-        transform.position = new Vector3(chunkPos.x, Mathf.Sin(dir) * radius, Mathf.Cos(dir) * radius);
+        float deg = ((2 * Mathf.PI) / (chunkMeshGen.chunkCount * chunkMeshGen.chunkLength));
+        float dir = (deg * chunkPos.y) + (deg * chunkMeshGen.chunkLength * chunkMeshGen.chunkIndex);
+
+        Debug.Log(chunkMeshGen.chunkIndex);
+
+        float radius = (chunkMeshGen.chunkCount * currentChunk.chunkSize.y) / (2 * Mathf.PI) - .5f;
+
+        transform.position = new Vector3(chunkPos.x + .5f, Mathf.Sin(dir) * radius, Mathf.Cos(dir) * radius);
+
+        transform.rotation = Quaternion.Euler(-dir * 57.8f, 0,0);
     }
 
     //int doScore() {

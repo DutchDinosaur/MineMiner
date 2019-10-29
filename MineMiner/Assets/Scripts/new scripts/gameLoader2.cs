@@ -7,7 +7,6 @@ public class gameLoader2 : MonoBehaviour
     [SerializeField] private Vector2Int chunkSize;
     [SerializeField] private int chunkCount;
 
-
     [SerializeField] private GameObject playerObject;
     private Player2 player;
 
@@ -45,7 +44,6 @@ public class gameLoader2 : MonoBehaviour
         if (player.transform.position.y > player.currentChunk.transform.position.y + chunkSize.y/2 && player.currentChunk == lastLoadedChunk) {            
             lastLoadedChunk = loadChunk(currentChunk += 1);
             player.nextChunk = lastLoadedChunk;
-            Debug.Log("aaaaaaaaaa");
         }
     }
 
@@ -55,7 +53,6 @@ public class gameLoader2 : MonoBehaviour
             chunk.chunkSize = new Vector2Int(chunksToLoad[i].ChunkWidth, chunkSize.y);
             chunk.randomBombPercent = chunksToLoad[i].randomBombPercent;
             chunk.randomFillPercent = chunksToLoad[i].randomFillPercent;
-            chunk.generateChunk();
             return chunk;
         }
         else {
@@ -63,7 +60,6 @@ public class gameLoader2 : MonoBehaviour
             Chunk.chunkSize = new Vector2Int(chunksToLoad[chunksToLoad.Length -1].ChunkWidth, chunkSize.y);
             Chunk.randomBombPercent = chunksToLoad[chunksToLoad.Length -1].randomBombPercent;
             Chunk.randomFillPercent = chunksToLoad[chunksToLoad.Length -1].randomFillPercent;
-            Chunk.generateChunk();
             return Chunk;
         }
     }
