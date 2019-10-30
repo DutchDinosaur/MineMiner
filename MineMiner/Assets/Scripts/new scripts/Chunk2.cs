@@ -110,6 +110,10 @@ public class Chunk2 : MonoBehaviour
             }
         }
         else {
+            
+
+
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
@@ -148,5 +152,14 @@ public class Chunk2 : MonoBehaviour
             }
         }
         return bombCount;
+    }
+
+    void explodeTile(int[][] tiles) {
+        for (int i = 0; i < tiles.Length; i++) {
+            if (tiles[i][0] > 0 && tiles[i][0] < chunkSize.x && tiles[i][1] > 0 && tiles[i][1]  < chunkSize.y) {
+                bombs[tiles[i][0], tiles[i][1]] = false;
+                walls[tiles[i][0], tiles[i][1]] = false;
+            }
+        }
     }
 }

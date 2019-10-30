@@ -255,10 +255,10 @@ MonoBehaviour:
   chunkPrefab: {fileID: 1108559211060560866, guid: 8dade0033f48a1449bffc6f8a0d337da,
     type: 3}
   chunksToLoad:
-  - ChunkWidth: 6
+  - ChunkWidth: 5
     randomBombPercent: 0
     randomFillPercent: 49
-  - ChunkWidth: 6
+  - ChunkWidth: 5
     randomBombPercent: 0
     randomFillPercent: 49
   - ChunkWidth: 6
@@ -327,6 +327,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Directional Light
       objectReference: {fileID: 0}
+    - target: {fileID: 6396830323014057935, guid: 194f79023ac5ac14ea3428a4bf24347d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -350,12 +355,12 @@ PrefabInstance:
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.000054659733
       objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.00006801944
       objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
@@ -375,7 +380,7 @@ PrefabInstance:
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
