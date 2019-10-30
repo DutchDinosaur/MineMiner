@@ -163,6 +163,10 @@ public class GenerateTiledCilinderChunk2 : MonoBehaviour
             }
         }
 
+        void GetUvs(int texture) {
+
+        }
+
         void AddQuadUVs(Vector2 BottomLeftCorner, Vector2 TopRightCorner) {
             uvs.Add(new Vector2(BottomLeftCorner.x, BottomLeftCorner.y));
             uvs.Add(new Vector2(BottomLeftCorner.x, TopRightCorner.y));

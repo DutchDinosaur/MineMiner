@@ -29,20 +29,20 @@ public class GenerateDesertEnviroment : MonoBehaviour
         for (int y = 0; y < chunkGen.chunkLength; y++) {
             for (int x = 0; x < SidesWidth; x++) {
                 if (x == 0) {
-                    vertices.Add(new Vector3(x, circlePosses[y].y, circlePosses[y].x));
                     vertices.Add(new Vector3(x, circlePosses[y + 1].y, circlePosses[y + 1].x));
-                    vertices.Add(new Vector3(x, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
-                    vertices.Add(new Vector3(x, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
+                    vertices.Add(new Vector3(x - wallSlope, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
+                    vertices.Add(new Vector3(x - wallSlope, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
+                    vertices.Add(new Vector3(x, circlePosses[y].y, circlePosses[y].x));
                     AddQuadUVs(new Vector2(0, 0.6667f), new Vector2(0.3333f, 1));
                     AddTriangles(true);
 
                     vertIndex += 4;
                 }
                 else {
-                    vertices.Add(new Vector3(-x, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
-                    vertices.Add(new Vector3(-x, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
-                    vertices.Add(new Vector3(-x + 1, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
-                    vertices.Add(new Vector3(-x + 1, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
+                    vertices.Add(new Vector3(-x - wallSlope, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
+                    vertices.Add(new Vector3(-x + 1 - wallSlope, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
+                    vertices.Add(new Vector3(-x + 1 - wallSlope, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
+                    vertices.Add(new Vector3(-x - wallSlope, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
                     AddQuadUVs(new Vector2(0, 0.6667f), new Vector2(0.3333f, 1));
                     AddTriangles(false);
 
@@ -52,20 +52,20 @@ public class GenerateDesertEnviroment : MonoBehaviour
 
             for (int x = 0; x > -SidesWidth; x--) {
                 if (x == 0) {
-                    vertices.Add(new Vector3(chunkGen.chunkWidth, circlePosses[y].y, circlePosses[y].x));
                     vertices.Add(new Vector3(chunkGen.chunkWidth, circlePosses[y + 1].y, circlePosses[y + 1].x));
-                    vertices.Add(new Vector3(chunkGen.chunkWidth, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
-                    vertices.Add(new Vector3(chunkGen.chunkWidth, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
+                    vertices.Add(new Vector3(chunkGen.chunkWidth + wallSlope, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
+                    vertices.Add(new Vector3(chunkGen.chunkWidth + wallSlope, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
+                    vertices.Add(new Vector3(chunkGen.chunkWidth, circlePosses[y].y, circlePosses[y].x));
                     AddQuadUVs(new Vector2(0, 0.6667f), new Vector2(0.3333f, 1));
                     AddTriangles(false);
 
                     vertIndex += 4;
                 }
                 else {
-                    vertices.Add(new Vector3(-x + chunkGen.chunkWidth -1, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
-                    vertices.Add(new Vector3(-x + chunkGen.chunkWidth -1, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
-                    vertices.Add(new Vector3(-x + chunkGen.chunkWidth, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
-                    vertices.Add(new Vector3(-x + chunkGen.chunkWidth, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
+                    vertices.Add(new Vector3(-x + chunkGen.chunkWidth -1 + wallSlope, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
+                    vertices.Add(new Vector3(-x + chunkGen.chunkWidth + wallSlope, cliffCirclePosses[y + 1].y, cliffCirclePosses[y + 1].x));
+                    vertices.Add(new Vector3(-x + chunkGen.chunkWidth + wallSlope,  cliffCirclePosses[y].y, cliffCirclePosses[y].x));
+                    vertices.Add(new Vector3(-x + chunkGen.chunkWidth - 1 + wallSlope, cliffCirclePosses[y].y, cliffCirclePosses[y].x));
                     AddQuadUVs(new Vector2(0, 0.6667f), new Vector2(0.3333f, 1));
                     AddTriangles(false);
 
@@ -104,6 +104,7 @@ public class GenerateDesertEnviroment : MonoBehaviour
         mesh.Clear();
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
+        mesh.uv = uvs.ToArray();
         mesh.RecalculateNormals();
         //mesh.normals = vertices.ToArray();
     }

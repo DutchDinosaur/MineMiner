@@ -76,7 +76,7 @@ public class Player2 : MonoBehaviour
         GenerateTiledCilinderChunk2 chunkMeshGen = currentChunk.GetComponent<GenerateTiledCilinderChunk2>();
 
         float deg = ((2 * Mathf.PI) / (chunkMeshGen.chunkCount * chunkMeshGen.chunkLength));
-        float dir = (deg * chunkPos.y) + (deg * chunkMeshGen.chunkLength * chunkMeshGen.chunkIndex);
+        float dir = (deg * (chunkPos.y + .5f)) + (deg * chunkMeshGen.chunkLength * chunkMeshGen.chunkIndex);
 
         float radius = (chunkMeshGen.chunkCount * currentChunk.chunkSize.y) / (2 * Mathf.PI) - .5f;
 
