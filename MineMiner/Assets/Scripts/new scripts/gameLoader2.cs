@@ -27,7 +27,7 @@ public class gameLoader2 : MonoBehaviour
     private void Start() {
         player = GameObject.Instantiate(playerObject, transform.position, Quaternion.identity).GetComponent<Player2>();
         GetComponent<SwipeDetection2>().player = player;
-        GetComponent<CameraController2>().player = player.transform;
+        GetComponent<CameraController2>().player = player;
 
         chunkList = new List<Chunk2>();
 

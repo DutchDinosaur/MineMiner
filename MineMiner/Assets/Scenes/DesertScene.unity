@@ -196,45 +196,21 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48384644}
-  m_LocalRotation: {x: -0, y: -0.98346835, z: -0.18107994, w: 0}
-  m_LocalPosition: {x: 1.98, y: -1.7661483, z: 16.374256}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 196772132}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -7.8950005, y: -179.99998, z: 0}
---- !u!1 &196772131
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 196772132}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &196772132
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196772131}
-  m_LocalRotation: {x: -0.112945616, y: 0, z: 0, w: 0.9936012}
-  m_LocalPosition: {x: 0, y: 7.3259544, z: 32.097103}
+  m_LocalRotation: {x: -0, y: -0.99762756, z: -0.0688428, w: 0}
+  m_LocalPosition: {x: 1.98, y: 9.28, z: 48.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1486357437}
-  - {fileID: 48384647}
+  - {fileID: 386367000}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -7.8950005, y: -179.99998, z: 0}
+--- !u!4 &386367000 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1882812322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1486357436
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,11 +235,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486357436}
-  m_LocalRotation: {x: 0.18107702, y: 0, z: 0, w: 0.9834689}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 1, z: 0.000002965331, w: 0}
+  m_LocalPosition: {x: 0, y: 36.6, z: 89.2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
-  m_Father: {fileID: 196772132}
+  m_Father: {fileID: 48384647}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 20.865, y: 0, z: 0}
 --- !u!212 &1486357438
@@ -304,7 +280,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e52369d9b4772f34aa9caf6a7ff493be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88d03211f66b30f4383a111451f78683, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -367,36 +343,36 @@ MonoBehaviour:
   chunkPrefab: {fileID: 1108559211060560866, guid: 8dade0033f48a1449bffc6f8a0d337da,
     type: 3}
   chunksToLoad:
-  - ChunkWidth: 5
-    randomBombPercent: 14
-    randomFillPercent: 49
-  - ChunkWidth: 5
-    randomBombPercent: 14
-    randomFillPercent: 49
-  - ChunkWidth: 5
-    randomBombPercent: 14
-    randomFillPercent: 49
-  - ChunkWidth: 5
-    randomBombPercent: 14
-    randomFillPercent: 49
-  - ChunkWidth: 5
-    randomBombPercent: 14
-    randomFillPercent: 49
-  - ChunkWidth: 5
-    randomBombPercent: 14
-    randomFillPercent: 49
-  - ChunkWidth: 5
-    randomBombPercent: 14
-    randomFillPercent: 49
-  - ChunkWidth: 5
-    randomBombPercent: 14
-    randomFillPercent: 49
-  - ChunkWidth: 5
-    randomBombPercent: 14
-    randomFillPercent: 49
-  - ChunkWidth: 5
-    randomBombPercent: 14
-    randomFillPercent: 49
+  - ChunkWidth: 3
+    randomBombPercent: 8
+    randomFillPercent: 46
+  - ChunkWidth: 4
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 4
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 4
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 6
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 6
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
 --- !u!114 &1661428846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,6 +388,7 @@ MonoBehaviour:
   camera: {fileID: 48384647}
   player: {fileID: 0}
   speedMult: 0.01
+  cameraDistance: 1.3
 --- !u!114 &1661428847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,13 +403,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSwipeDistance: 20
   onlySwipeAfterRelaease: 1
+  speed: 3
   player: {fileID: 0}
 --- !u!1001 &1882812322
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 48384647}
     m_Modifications:
     - target: {fileID: 6396830323014057935, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
@@ -447,37 +425,37 @@ PrefabInstance:
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.9799998
       objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -15.847077
       objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 46.71607
       objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.85708636
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.5729548
       objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.81958705
       objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5151728
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6396830323014057777, guid: 194f79023ac5ac14ea3428a4bf24347d,
         type: 3}

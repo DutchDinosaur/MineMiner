@@ -19,6 +19,7 @@ public class Chunk2 : MonoBehaviour
 
     public bool[,] walls;
     public bool[,] bombs;
+    public bool[,] exploded;
     public int[,] values;
 
     private GenerateTiledCilinderChunk2 meshGen;
@@ -27,6 +28,7 @@ public class Chunk2 : MonoBehaviour
         walls = new bool[chunkSize.x, chunkSize.y];
         bombs = new bool[chunkSize.x, chunkSize.y];
         values = new int[chunkSize.x, chunkSize.y];
+        exploded = new bool[chunkSize.x, chunkSize.y];
 
         randomFillMap();
         for (int i = 0; i < smoothingPasses; i++) {
@@ -38,11 +40,10 @@ public class Chunk2 : MonoBehaviour
     }
 
 
-    void randomFillMap()
-    {
-        if (useRandomSeed)
-        {
-            seed = Time.time.ToString();
+    void randomFillMap() {
+        if (useRandomSeed) {
+            meshGen = GetComponent<GenerateTiledCilinderChunk2>();
+            seed = Time.time.ToString() + meshGen.chunkIndex.ToString();
         }
         System.Random Random = new System.Random(seed.GetHashCode());
 
@@ -59,8 +60,7 @@ public class Chunk2 : MonoBehaviour
         }
     }
 
-    void smoothMap()
-    {
+    void smoothMap() {
         for (int x = 0; x < chunkSize.x; x++) {
             for (int y = 0; y < chunkSize.y; y++) {
                 int neighborWallTiles = GetSurroundingWallCount(x, y);
@@ -100,7 +100,6 @@ public class Chunk2 : MonoBehaviour
     public void mineTile(int x, int y) {
         if (!bombs[x,y]) {
             walls[x, y] = false;
-            meshGen = GetComponent<GenerateTiledCilinderChunk2>();
             meshGen.GenerateTileMesh(walls, y);
             if (y > 0) {
                 meshGen.GenerateTileMesh(walls, y - 1);
@@ -110,13 +109,14 @@ public class Chunk2 : MonoBehaviour
             }
         }
         else {
+            bombs[x, y] = false;
+
             Vector2Int[] tilesToExplode = new Vector2Int[] { new Vector2Int(-1, 1), new Vector2Int(0, 1), new Vector2Int(1, 1),
                                                              new Vector2Int(-1, 0), new Vector2Int(0, 0), new Vector2Int(1, 0),
                                                              new Vector2Int(-1, -1), new Vector2Int(0, -1), new Vector2Int(1, -1),};
 
-            explodeTile(tilesToExplode,new Vector2Int(x,y));
+            Vector2Int[] bombsToExplode = explodeTile(tilesToExplode, new Vector2Int(x, y)).ToArray();
 
-            meshGen = GetComponent<GenerateTiledCilinderChunk2>();
             meshGen.GenerateTileMesh(walls, y);
             if (y > 0) {
                 meshGen.GenerateTileMesh(walls, y - 1);
@@ -131,6 +131,11 @@ public class Chunk2 : MonoBehaviour
                 }
             }
 
+            if (bombsToExplode.Length > 0) {
+                for (int i = 0; i < bombsToExplode.Length; i++) {
+                    mineTile(bombsToExplode[i].x, bombsToExplode[i].y);
+                }
+            }
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
@@ -171,13 +176,19 @@ public class Chunk2 : MonoBehaviour
         return bombCount;
     }
 
-    void explodeTile(Vector2Int[] tiles, Vector2Int playerPos) {
+    List<Vector2Int> explodeTile(Vector2Int[] tiles, Vector2Int playerPos) {
+        List<Vector2Int> bombList = new List<Vector2Int>();
         for (int i = 0; i < tiles.Length; i++) {
             Vector2Int pos = tiles[i] + playerPos;
             if (pos.x >= 0 && pos.x < chunkSize.x && pos.y > 0 && pos.y < chunkSize.y) {
                 walls[pos.x, pos.y] = false;
-                bombs[pos.x, pos.y] = false;
+                //bombs[pos.x, pos.y] = false;
+                if (bombs[pos.x, pos.y]) {
+                    bombList.Add(new Vector2Int(pos.x, pos.y));
+                }
+                exploded[pos.x, pos.y] = true;
             }
         }
+        return bombList;
     }
 }

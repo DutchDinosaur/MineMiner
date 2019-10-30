@@ -51,7 +51,7 @@ MonoBehaviour:
   randomBombPercent: 10
   tileNumbers: []
   seed: 
-  useRandomSeed: 0
+  useRandomSeed: 1
   randomFillPercent: 68
   smoothingPasses: 5
 --- !u!114 &6068228146936132746

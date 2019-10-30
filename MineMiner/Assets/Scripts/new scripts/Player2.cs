@@ -82,7 +82,7 @@ public class Player2 : MonoBehaviour
 
         transform.position = new Vector3(chunkPos.x + .5f, Mathf.Sin(dir) * radius, Mathf.Cos(dir) * radius);
 
-        transform.rotation = Quaternion.Euler(-dir * 57.8f, 0,0);
+        transform.rotation = Quaternion.Euler(-dir * 57.3f, 0,0);
     }
 
     //int doScore() {
