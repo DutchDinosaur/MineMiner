@@ -78,8 +78,6 @@ public class Player2 : MonoBehaviour
         float deg = ((2 * Mathf.PI) / (chunkMeshGen.chunkCount * chunkMeshGen.chunkLength));
         float dir = (deg * chunkPos.y) + (deg * chunkMeshGen.chunkLength * chunkMeshGen.chunkIndex);
 
-        Debug.Log(chunkMeshGen.chunkIndex);
-
         float radius = (chunkMeshGen.chunkCount * currentChunk.chunkSize.y) / (2 * Mathf.PI) - .5f;
 
         transform.position = new Vector3(chunkPos.x + .5f, Mathf.Sin(dir) * radius, Mathf.Cos(dir) * radius);

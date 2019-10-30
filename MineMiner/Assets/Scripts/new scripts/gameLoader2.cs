@@ -15,7 +15,7 @@ public class gameLoader2 : MonoBehaviour
     [SerializeField] private chunkData[] chunksToLoad;
 
     private int currentChunk;
-    private Chunk2 lastLoadedChunk;
+    private List<Chunk2> chunkList;
 
     [System.Serializable]
     public class chunkData {
@@ -25,15 +25,21 @@ public class gameLoader2 : MonoBehaviour
     }
 
     private void Start() {
-        player = GameObject.Instantiate(playerObject,transform.position,Quaternion.identity).GetComponent<Player2>();
+        player = GameObject.Instantiate(playerObject, transform.position, Quaternion.identity).GetComponent<Player2>();
         GetComponent<SwipeDetection2>().player = player;
         GetComponent<CameraController2>().player = player.transform;
 
-        if (chunksToLoad.Length > 1) {
-            player.currentChunk = loadChunk(0);
-            lastLoadedChunk = loadChunk(1);
-            currentChunk = 1;
-            player.nextChunk = lastLoadedChunk;
+        chunkList = new List<Chunk2>();
+
+        if (chunksToLoad.Length > 3) {
+            chunkList.Add(loadChunk(0));
+            chunkList.Add(loadChunk(1));
+            chunkList.Add(loadChunk(2));
+
+            player.currentChunk = chunkList[0];
+            player.nextChunk = chunkList[1];
+
+            currentChunk = 2;
         }
         else {
             Debug.LogError("not enough chunksToLoad");
@@ -41,26 +47,36 @@ public class gameLoader2 : MonoBehaviour
     }
 
     private void Update() {
-        if (player.transform.position.y > player.currentChunk.transform.position.y + chunkSize.y/2 && player.currentChunk == lastLoadedChunk) {            
-            lastLoadedChunk = loadChunk(currentChunk += 1);
-            player.nextChunk = lastLoadedChunk;
+        if (player.chunkPos.y > chunkSize.y/2 && player.currentChunk == chunkList[chunkList.Count -3]) {
+            chunkList.Add(loadChunk(currentChunk += 1));
+            player.nextChunk = chunkList[chunkList.Count - 3];
+            DespawnChunks();
         }
     }
 
     Chunk2 loadChunk(int i) {
         if (i < chunksToLoad.Length) {
-            Chunk2 chunk = GameObject.Instantiate(chunkPrefab, transform.position + Vector3.up * chunkSize.y * i, Quaternion.identity).GetComponent<Chunk2>();
+            Chunk2 chunk = GameObject.Instantiate(chunkPrefab, transform.position, Quaternion.identity).GetComponent<Chunk2>();
             chunk.chunkSize = new Vector2Int(chunksToLoad[i].ChunkWidth, chunkSize.y);
             chunk.randomBombPercent = chunksToLoad[i].randomBombPercent;
             chunk.randomFillPercent = chunksToLoad[i].randomFillPercent;
+            chunk.gameObject.GetComponent<GenerateTiledCilinderChunk2>().chunkIndex = i;
             return chunk;
         }
         else {
-            Chunk2 Chunk = GameObject.Instantiate(chunkPrefab, transform.position + Vector3.up * chunkSize.y * (chunksToLoad.Length + 1), Quaternion.identity).GetComponent<Chunk2>();
-            Chunk.chunkSize = new Vector2Int(chunksToLoad[chunksToLoad.Length -1].ChunkWidth, chunkSize.y);
-            Chunk.randomBombPercent = chunksToLoad[chunksToLoad.Length -1].randomBombPercent;
-            Chunk.randomFillPercent = chunksToLoad[chunksToLoad.Length -1].randomFillPercent;
-            return Chunk;
+            Chunk2 chunk = GameObject.Instantiate(chunkPrefab, transform.position, Quaternion.identity).GetComponent<Chunk2>();
+            chunk.chunkSize = new Vector2Int(chunksToLoad[chunksToLoad.Length -1].ChunkWidth, chunkSize.y);
+            chunk.randomBombPercent = chunksToLoad[chunksToLoad.Length -1].randomBombPercent;
+            chunk.randomFillPercent = chunksToLoad[chunksToLoad.Length -1].randomFillPercent;
+            chunk.gameObject.GetComponent<GenerateTiledCilinderChunk2>().chunkIndex = i;
+            return chunk;
+        }
+    }
+
+    void DespawnChunks() {
+        if (chunkList.Count > 6) {
+            Destroy(chunkList[0].gameObject);
+            chunkList.RemoveAt(0);
         }
     }
 }

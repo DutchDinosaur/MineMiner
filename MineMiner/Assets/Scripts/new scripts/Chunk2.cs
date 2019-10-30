@@ -29,8 +29,7 @@ public class Chunk2 : MonoBehaviour
         values = new int[chunkSize.x, chunkSize.y];
 
         randomFillMap();
-        for (int i = 0; i < smoothingPasses; i++)
-        {
+        for (int i = 0; i < smoothingPasses; i++) {
             smoothMap();
         }
 
@@ -114,7 +113,6 @@ public class Chunk2 : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
-
 
     int GetTileObjectIndex(int x, int y) {
         return (x * chunkSize.y + y);

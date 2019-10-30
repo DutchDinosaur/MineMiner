@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunkSize: {x: 0, y: 0}
-  chunkIndex: 0
-  chunkCount: 4
   randomBombPercent: 10
   tileNumbers: []
   seed: 
@@ -67,9 +65,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkLength: 30
   chunkWidth: 9
-  chunkCount: 4
+  chunkCount: 7
   digDepth: 1
-  chunk: {fileID: 2215093720156620480}
   chunkTileObject: {fileID: 5799174899960102827, guid: 69b60a7f429cc44449e002d57ebcf43b,
     type: 3}
   chunkIndex: 0
