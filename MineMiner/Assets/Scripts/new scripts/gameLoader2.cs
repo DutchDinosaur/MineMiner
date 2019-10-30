@@ -61,15 +61,12 @@ public class gameLoader2 : MonoBehaviour
             chunk.randomBombPercent = chunksToLoad[i].randomBombPercent;
             chunk.randomFillPercent = chunksToLoad[i].randomFillPercent;
             chunk.gameObject.GetComponent<GenerateTiledCilinderChunk2>().chunkIndex = i;
+            chunk.gameObject.GetComponent<GenerateTiledCilinderChunk2>().chunkWidth = chunksToLoad[i].ChunkWidth;
             return chunk;
         }
         else {
-            Chunk2 chunk = GameObject.Instantiate(chunkPrefab, transform.position, Quaternion.identity).GetComponent<Chunk2>();
-            chunk.chunkSize = new Vector2Int(chunksToLoad[chunksToLoad.Length -1].ChunkWidth, chunkSize.y);
-            chunk.randomBombPercent = chunksToLoad[chunksToLoad.Length -1].randomBombPercent;
-            chunk.randomFillPercent = chunksToLoad[chunksToLoad.Length -1].randomFillPercent;
-            chunk.gameObject.GetComponent<GenerateTiledCilinderChunk2>().chunkIndex = i;
-            return chunk;
+            Debug.LogError("ran out of chunks");
+            return null;
         }
     }
 
