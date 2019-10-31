@@ -13,6 +13,7 @@ public class StartGame : MonoBehaviour
     {
         //tapToHoldpanel.SetActive(false);
         //homeButton.SetActive(true);
-        SceneManager.LoadScene("Level1");
+        //SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

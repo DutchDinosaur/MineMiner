@@ -6,7 +6,6 @@ public class CameraController2 : MonoBehaviour
 {
     [SerializeField] private Transform camera;
     public Player2 player;
-    [SerializeField] float speedMult;
 
     [SerializeField]private float cameraDistance;
 

@@ -13,6 +13,7 @@ public class Player2 : MonoBehaviour
     private Chunk2 lastChunk;
 
     public Vector2Int chunkPos;
+    public GameManager manager;
 
     private void Start() {
         chunkPos = new Vector2Int(currentChunk.chunkSize.x/2, currentChunk.chunkSize.y / 2);
@@ -47,6 +48,7 @@ public class Player2 : MonoBehaviour
                     }
                     else {
                         chunkPos += Vector2Int.up;
+                        manager.Dist += 1;
                     }
                 }
                 else {

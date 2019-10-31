@@ -12,7 +12,7 @@ public class gameLoader2 : MonoBehaviour
 
     [SerializeField] private GameObject chunkPrefab;
 
-    [SerializeField] private chunkData[] chunksToLoad;
+    public  chunkData[] chunksToLoad;
 
     private int currentChunk;
     private List<Chunk2> chunkList;
@@ -29,6 +29,8 @@ public class gameLoader2 : MonoBehaviour
         GetComponent<SwipeDetection2>().player = player;
         GetComponent<CameraController2>().player = player;
         GetComponent<TimeLimit>().player = player;
+        GetComponent<GameManager>().player = player;
+        player.manager = GetComponent<GameManager>();
 
         chunkList = new List<Chunk2>();
 
@@ -66,7 +68,6 @@ public class gameLoader2 : MonoBehaviour
             return chunk;
         }
         else {
-            Debug.LogError("ran out of chunks");
             return null;
         }
     }
