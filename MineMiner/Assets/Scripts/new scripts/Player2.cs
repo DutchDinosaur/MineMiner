@@ -15,7 +15,7 @@ public class Player2 : MonoBehaviour
     public Vector2Int chunkPos;
 
     private void Start() {
-        chunkPos = new Vector2Int(currentChunk.chunkSize.x/2, 0);
+        chunkPos = new Vector2Int(currentChunk.chunkSize.x/2, currentChunk.chunkSize.y / 2);
     }
 
     public void Move(int dir) {

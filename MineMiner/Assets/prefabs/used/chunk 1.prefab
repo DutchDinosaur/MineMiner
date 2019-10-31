@@ -88,6 +88,11 @@ MonoBehaviour:
   cliffHeight: 0.7
   wallSlope: 0.5
   SidesWidth: 9
+  desertObjects:
+  - {fileID: 1320906717454473619, guid: b936324f51f9a0042a80b60a594989f4, type: 3}
+  - {fileID: 4187438210332206772, guid: 6dde384180feebf41b9f7b60e23c6f4b, type: 3}
+  - {fileID: 2816279086410613831, guid: be2b0d155a1cb4c4f9b390dd8dd35f2f, type: 3}
+  ObjectCount: 2
 --- !u!33 &4007835069483344074
 MeshFilter:
   m_ObjectHideFlags: 0

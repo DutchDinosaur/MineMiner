@@ -10,6 +10,9 @@ public class GenerateDesertEnviroment : MonoBehaviour
     [SerializeField] float wallSlope;
     [SerializeField] int SidesWidth;
 
+    [SerializeField] private GameObject[] desertObjects;
+    [SerializeField] private int ObjectCount;
+
     void Start() {
         chunkGen = GetComponent<GenerateTiledCilinderChunk2>();
         GenerateEnviroment();
@@ -107,6 +110,23 @@ public class GenerateDesertEnviroment : MonoBehaviour
         mesh.uv = uvs.ToArray();
         mesh.RecalculateNormals();
         //mesh.normals = vertices.ToArray();
+
+        for (int i = 0; i < ObjectCount; i++) {
+            int y = Random.Range(0, chunkGen.chunkLength);
+
+            Vector2 p = cliffCirclePosses[y];
+            int x = Random.Range(0, SidesWidth * 2);
+            if (x > SidesWidth) {
+                x += chunkGen.chunkWidth - SidesWidth +1;
+            }
+            else if (x <= SidesWidth)
+            {
+                x = -x;
+            }
+            Vector3 pos = new Vector3(x -1,p.y,p.x);
+
+            spawnDesertObjects(DirOnCircle(y), pos);
+        }
     }
 
     Vector2[] possesOnCircle(int length, float radius) {
@@ -117,5 +137,16 @@ public class GenerateDesertEnviroment : MonoBehaviour
             posses[y] = new Vector2(Mathf.Cos(dir) * radius, Mathf.Sin(dir) * radius);
         }
         return posses;
+    }
+
+    Quaternion DirOnCircle(int y) {
+        float deg = ((2 * Mathf.PI) / (chunkGen.chunkCount * chunkGen.chunkLength));
+        float dir = (deg * y) + (deg * chunkGen.chunkLength * chunkGen.chunkIndex);
+        return Quaternion.Euler(-dir * 57.3f, 0, 0); ;
+    }
+
+    void spawnDesertObjects(Quaternion rotation, Vector3 pos) {
+        int randomObject = Random.Range(0, desertObjects.Length);
+        GameObject.Instantiate(desertObjects[randomObject], pos, rotation, transform);
     }
 }

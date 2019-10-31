@@ -211,6 +211,81 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1882812322}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1204861471 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+    type: 3}
+  m_PrefabInstance: {fileID: 1300661771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1300661771
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 758745676334129808, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_Name
+      value: death border
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 758745676334129809, guid: 5cd6dd51210760349a2c6aff6db46980,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5cd6dd51210760349a2c6aff6db46980, type: 3}
 --- !u!1 &1486357436
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +378,7 @@ GameObject:
   - component: {fileID: 1661428845}
   - component: {fileID: 1661428846}
   - component: {fileID: 1661428847}
+  - component: {fileID: 1661428848}
   m_Layer: 0
   m_Name: GameLoader
   m_TagString: Untagged
@@ -345,8 +421,8 @@ MonoBehaviour:
   chunksToLoad:
   - ChunkWidth: 3
     randomBombPercent: 8
-    randomFillPercent: 46
-  - ChunkWidth: 4
+    randomFillPercent: 6
+  - ChunkWidth: 3
     randomBombPercent: 10
     randomFillPercent: 48
   - ChunkWidth: 4
@@ -359,6 +435,36 @@ MonoBehaviour:
     randomBombPercent: 10
     randomFillPercent: 48
   - ChunkWidth: 6
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
+    randomBombPercent: 10
+    randomFillPercent: 48
+  - ChunkWidth: 7
     randomBombPercent: 10
     randomFillPercent: 48
   - ChunkWidth: 7
@@ -404,6 +510,22 @@ MonoBehaviour:
   minSwipeDistance: 20
   onlySwipeAfterRelaease: 1
   speed: 3
+  player: {fileID: 0}
+--- !u!114 &1661428848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661428843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb7d09070ab94f4e994def9fa42dc54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DEATH: {fileID: 1204861471}
+  speed: 2
+  Distance: 1.1
   player: {fileID: 0}
 --- !u!1001 &1882812322
 PrefabInstance:
